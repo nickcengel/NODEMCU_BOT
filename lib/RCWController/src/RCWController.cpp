@@ -30,7 +30,7 @@ void RCWController::begin(WiFiUDP *udp) {
 };
 
 uint8_t RCWController::GetData() {
-  uint16_t DataIn;
+  uint16_t DataIn = 0;
   while (1) {
     DataIn = _udp->parsePacket();
     if (DataIn < 10) {
@@ -42,5 +42,21 @@ uint8_t RCWController::GetData() {
     break;
   }
   delay(8);
-  return 0;
+  return DataIn;
+};
+
+boolean RCWController::Button(uint8_t whatButton) {
+  return ((whatButton == *(RCWBuf + 1)) ? 1 : 0);
+};
+
+uint8_t RCWController::joyStick1(boolean whatdirection) {
+  return ((whatdirection) ? *(RCWBuf + 3) : *(RCWBuf + 2));
+};
+
+uint8_t RCWController::joyStick2(boolean whatdirection) {
+  return ((whatdirection) ? *(RCWBuf + 5) : *(RCWBuf + 4));
+};
+
+uint8_t RCWController::Accelerometer(boolean whatdirection) {
+  return ((whatdirection) ? *(RCWBuf + 7) : *(RCWBuf + 6));
 };

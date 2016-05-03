@@ -14,4 +14,13 @@ RCWController Controller(ssid, password, localPort);
 
 void setup() { Controller.begin(&udp); }
 
-void loop() { uint8_t g = Controller.GetData(); }
+void loop() {
+  uint8_t data = Controller.GetData();
+  // if (data) {
+  //  Serial.println(Controller.Button(FORWARDS));
+  //}
+
+  if (data) {
+    Serial.println(Controller.joyStick2(YDirection));
+  }
+}
