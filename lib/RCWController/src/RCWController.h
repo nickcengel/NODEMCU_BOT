@@ -5,7 +5,7 @@
 #include <ESP8266WiFi.h>
 #include <WiFiUDP.h>
 
-#define BUFFER_LENGTH 32
+#define BUFFER_LENGTH 256
 
 #define XDirection 0
 #define YDirection 1
