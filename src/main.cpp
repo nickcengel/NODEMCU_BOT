@@ -14,4 +14,7 @@ RCWController Controller(ssid, password, localPort);
 
 void setup() { Controller.begin(&udp); }
 
-void loop() { uint8_t data = Controller.GetData(); }
+void loop() {
+  uint8_t data = Controller.GetData();
+  boolean F = Controller.Button(FORWARDS);
+}
