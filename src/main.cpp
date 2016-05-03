@@ -1,5 +1,5 @@
 #include "RCWController.h"
-#include <Arduino.h>
+#include "arduino.h"
 #include <ESP8266WiFi.h>
 #include <WiFiUDP.h>
 #include <motr.h>
@@ -12,9 +12,37 @@ WiFiUDP udp; // Create a UDP object to receive messages from app
 
 RCWController Controller(ssid, password, localPort);
 
-void setup() { Controller.begin(&udp); }
+motr Lmotor(5, 4); // D1, D2
+motr Rmotor(0, 2); // D3, D4
+
+void setup() {
+  Lmotor.STOP();
+  Rmotor.STOP();
+
+  Controller.begin(&udp);
+}
 
 void loop() {
   uint8_t data = Controller.GetData();
-  boolean F = Controller.Button(FORWARDS);
+
+  switch (Controller.Button()) {
+  case FORWARDS:
+    Lmotor.GO(1, 200);
+    Rmotor.GO(1, 200);
+    break;
+  case BACKWARDS:
+    Lmotor.GO(0, 200);
+    Rmotor.GO(0, 200);
+    break;
+  case LEFT:
+    Lmotor.GO(1, 20);
+    Rmotor.GO(1, 200);
+    break;
+  case RIGHT:
+    Lmotor.GO(1, 200);
+    Rmotor.GO(1, 20);
+  default:
+    Lmotor.STOP();
+    Rmotor.STOP();
+  }
 }

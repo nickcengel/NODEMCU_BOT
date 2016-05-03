@@ -45,9 +45,7 @@ uint8_t RCWController::GetData() {
   return DataIn;
 };
 
-boolean RCWController::Button(uint8_t whatButton) {
-  return ((whatButton == *(RCWBuf + 1)) ? 1 : 0);
-};
+uint8_t RCWController::Button() { return *(RCWBuf + 1); };
 
 uint8_t RCWController::joyStick1(boolean whatdirection) {
   return ((whatdirection) ? *(RCWBuf + 3) : *(RCWBuf + 2));

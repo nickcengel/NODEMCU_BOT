@@ -24,7 +24,7 @@ public:
   RCWController(const char *ssid, const char *password, uint16_t localPort);
   void begin(WiFiUDP *udp);
   uint8_t GetData();
-  boolean Button(uint8_t whatButton);
+  uint8_t Button();
   uint8_t joyStick1(boolean whatdirection);
   uint8_t joyStick2(boolean whatdirection);
   uint8_t Accelerometer(boolean whatdirection);
