@@ -12,7 +12,7 @@ void Amotor::begin() {
   digitalWrite(pinB_, 1);
 }
 
-void Amotor::Go(boolean direction, uint16_t speed) {
+void Amotor::Go(uint8_t direction, uint16_t speed) {
 
   direction_ = direction;
   speed_ = speed;
