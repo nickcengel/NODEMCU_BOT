@@ -25,6 +25,7 @@ void RCWController::begin(WiFiUDP *udp) {
   _udp->begin(_localPort);
   //  Serial.print("Local port: ");
   // Serial.println(_udp->localPort());
+  _udp->flush();
   delay(100);
 };
 
