@@ -29,7 +29,7 @@ void RCWController::begin(WiFiUDP *udp) {
   delay(100);
 };
 
-uint8_t RCWController::GetData() {
+void RCWController::GetData() {
 
   uint8_t DataIn;
   while (1) {
@@ -41,8 +41,6 @@ uint8_t RCWController::GetData() {
     _udp->read(RCWBuf, (DataIn > BUFFER_LENGTH) ? BUFFER_LENGTH : DataIn);
     break;
   }
-
-  return DataIn;
 };
 
 uint8_t RCWController::Button() { return *(RCWBuf + 1); };

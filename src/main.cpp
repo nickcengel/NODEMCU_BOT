@@ -4,6 +4,8 @@
 #include <WiFiUDP.h>
 #include <motr.h>
 
+void ButtonMove();
+
 const char *ssid = "DG1670AB2";         // Name of WiFi network
 const char *password = "DG1670A74A7B2"; // WiFi network password
 const uint16_t localPort = 4242;        // Port that the app is connected to
@@ -25,7 +27,12 @@ void setup() {
 
 void loop() {
 
-  uint8_t data = Controller.GetData();
+  Controller.GetData();
+  ButtonMove();
+  delay(10);
+}
+
+void ButtonMove() {
   uint8_t direction = Controller.Button();
 
   if (direction != previous) {
@@ -53,5 +60,4 @@ void loop() {
     }
   }
   previous = direction;
-  delay(10);
 }
