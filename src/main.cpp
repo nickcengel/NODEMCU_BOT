@@ -40,8 +40,8 @@ void loop() {
     RightMotor.Go(FORWARDS);
   } break;
   case RIGHT: {
-    LeftMotor.Go(BACKWARDS);
-    RightMotor.Go(BACKWARDS);
+    LeftMotor.Go(FORWARDS);
+    RightMotor.Go(STOP);
   } break;
   default: {
     LeftMotor.Go(STOP);
