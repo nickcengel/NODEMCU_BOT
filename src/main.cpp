@@ -6,7 +6,8 @@
 
 const char *ssid = "DG1670AB2";         // Name of WiFi network
 const char *password = "DG1670A74A7B2"; // WiFi network password
-const uint16_t localPort = 10000;       // Port that the app is connected to
+const uint16_t localPort = 4242;        // Port that the app is connected to
+uint8_t previous = 0;
 
 WiFiUDP udp; // Create a UDP object to receive messages from app
 
@@ -23,29 +24,34 @@ void setup() {
 }
 
 void loop() {
+
   uint8_t data = Controller.GetData();
   uint8_t direction = Controller.Button();
 
-  switch (direction) {
-  case FORWARDS: {
-    LeftMotor.Go(FORWARDS);
-    RightMotor.Go(FORWARDS);
-  } break;
-  case BACKWARDS: {
-    LeftMotor.Go(BACKWARDS);
-    RightMotor.Go(BACKWARDS);
-  } break;
-  case LEFT: {
-    LeftMotor.Go(STOP);
-    RightMotor.Go(FORWARDS);
-  } break;
-  case RIGHT: {
-    LeftMotor.Go(FORWARDS);
-    RightMotor.Go(STOP);
-  } break;
-  default: {
-    LeftMotor.Go(STOP);
-    RightMotor.Go(STOP);
-  } break;
+  if (direction != previous) {
+    switch (direction) {
+    case FORWARDS: {
+      LeftMotor.Go(FORWARDS);
+      RightMotor.Go(FORWARDS);
+    } break;
+    case BACKWARDS: {
+      LeftMotor.Go(BACKWARDS);
+      RightMotor.Go(BACKWARDS);
+    } break;
+    case LEFT: {
+      LeftMotor.Go(STOP);
+      RightMotor.Go(FORWARDS);
+    } break;
+    case RIGHT: {
+      LeftMotor.Go(FORWARDS);
+      RightMotor.Go(STOP);
+    } break;
+    default: {
+      LeftMotor.Go(STOP);
+      RightMotor.Go(STOP);
+    } break;
+    }
   }
+  previous = direction;
+  delay(10);
 }

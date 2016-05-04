@@ -25,23 +25,22 @@ void RCWController::begin(WiFiUDP *udp) {
   _udp->begin(_localPort);
   //  Serial.print("Local port: ");
   // Serial.println(_udp->localPort());
-  delay(2000);
-  //  _udp->flush();
+  delay(100);
 };
 
 uint8_t RCWController::GetData() {
-  uint16_t DataIn = 0;
+
+  uint8_t DataIn;
   while (1) {
     DataIn = _udp->parsePacket();
     if (DataIn < 10) {
       delay(1);
-      break;
+      continue;
     }
     _udp->read(RCWBuf, (DataIn > BUFFER_LENGTH) ? BUFFER_LENGTH : DataIn);
-    //  _udp->flush();
     break;
   }
-  delay(8);
+
   return DataIn;
 };
 
