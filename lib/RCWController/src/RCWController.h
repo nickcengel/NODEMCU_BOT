@@ -9,6 +9,7 @@
 
 #define XDirection 0
 #define YDirection 1
+#define STOP 0
 #define FORWARDS 1
 #define BACKWARDS 2
 #define RIGHT 4
