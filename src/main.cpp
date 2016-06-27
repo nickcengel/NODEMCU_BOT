@@ -9,8 +9,6 @@
 #define D3 0
 #define D4 2
 
-void ButtonMove(); // Prototype for button control function
-
 const char *ssid = "DG1670AB2";         // Name of WiFi network
 const char *password = "DG1670A74A7B2"; // WiFi network password
 const uint16_t localPort = 4242;        // Port that the app is connected to
@@ -24,6 +22,8 @@ RCWController Controller(ssid, password,
 
 Dmotor LeftMotor(D1, D2); // Create motor objects
 Dmotor RightMotor(D3, D4);
+
+void ButtonMove(); // Prototype for button control function
 
 void setup() {
   RightMotor.begin();
