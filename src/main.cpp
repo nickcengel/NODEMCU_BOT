@@ -1,10 +1,14 @@
-#include "RCWController.h"
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
+#include <RCWController.h>
 #include <WiFiUDP.h>
 #include <motr.h>
 
-void ButtonMove();
+#define D1 5
+#define D2 4
+#define D3 0
+#define D4 2
+void ButtonMove(); // Prototype for button control function
 
 const char *ssid = "DG1670AB2";         // Name of WiFi network
 const char *password = "DG1670A74A7B2"; // WiFi network password
@@ -13,23 +17,23 @@ uint8_t previous = 0;
 
 WiFiUDP udp; // Create a UDP object to receive messages from app
 
-RCWController Controller(ssid, password, localPort);
+RCWController Controller(ssid, password,
+                         localPort); // Create an object to connect to wifi
 
-Dmotor LeftMotor(5, 4);  // D1, D2
-Dmotor RightMotor(0, 2); // D3, D4
+Dmotor LeftMotor(D1, D2); // Create motor objects
+Dmotor RightMotor(D3, D4);
 
 void setup() {
-  LeftMotor.begin();
   RightMotor.begin();
+  LeftMotor.begin();
 
   Controller.begin(&udp);
 }
 
 void loop() {
-
   Controller.GetData();
+  delay(5);
   ButtonMove();
-  delay(10);
 }
 
 void ButtonMove() {
@@ -58,6 +62,6 @@ void ButtonMove() {
       RightMotor.Go(STOP);
     } break;
     }
+    previous = direction;
   }
-  previous = direction;
 }

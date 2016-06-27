@@ -18,12 +18,12 @@ void Amotor::Go(uint8_t direction, uint16_t speed) {
   speed_ = speed;
 
   if (direction_ == FORWARDS) {
-    digitalWrite(pinA_, 0);
+    digitalWrite(pinA_, 1);
     analogWrite(pinB_, speed_);
   }
   if (direction_ == BACKWARDS) {
 
-    digitalWrite(pinB_, 0);
+    digitalWrite(pinB_, 1);
     analogWrite(pinA_, speed_);
   }
 };

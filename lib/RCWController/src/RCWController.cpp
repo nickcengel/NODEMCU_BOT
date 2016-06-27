@@ -15,22 +15,28 @@ RCWController::RCWController(const char *ssid, const char *password,
 uint8_t RCWController::RCWBuf[BUFFER_LENGTH];
 
 void RCWController::begin(WiFiUDP *udp) {
-  //  Serial.begin(115200);
+  // Serial.begin(115200);
   // Serial.println("Connecting to");
   WiFi.softAP(_ssid, _password);
   IP = WiFi.softAPIP();
-  //  Serial.print("AP IP address: ");
-  //  Serial.println(IP);
+  // Serial.print("AP IP address: ");
+  // Serial.println(IP);
   _udp = udp;
   _udp->begin(_localPort);
-  //  Serial.print("Local port: ");
+  // Serial.print("Local port: ");
   // Serial.println(_udp->localPort());
   _udp->flush();
-  delay(100);
 };
 
 void RCWController::GetData() {
 
+  // if (WiFi.status() != WL_CONNECTED) {
+  //   WiFi.softAP(_ssid, _password);
+  //   IP = WiFi.softAPIP();
+  // }
+  // if (!_udp) {
+  //   _udp->begin(_localPort);
+  // }
   uint8_t DataIn;
   while (1) {
     DataIn = _udp->parsePacket();
