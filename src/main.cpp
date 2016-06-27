@@ -8,12 +8,14 @@
 #define D2 4
 #define D3 0
 #define D4 2
+
 void ButtonMove(); // Prototype for button control function
 
 const char *ssid = "DG1670AB2";         // Name of WiFi network
 const char *password = "DG1670A74A7B2"; // WiFi network password
 const uint16_t localPort = 4242;        // Port that the app is connected to
-uint8_t previous = 0;
+
+uint8_t previous = 0; // Previous command value from controller app
 
 WiFiUDP udp; // Create a UDP object to receive messages from app
 
